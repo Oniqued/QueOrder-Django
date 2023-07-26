@@ -103,6 +103,7 @@
             <!-- Divider-->
             <hr class="my-4" />
             <!-- 리뷰 작성란 -->
+            {% if user.is_authenticated %}
             <div class="post-preview" style="text-align: center">
                 <h2 class="post-title">리뷰작성</h2>
             </div>
@@ -138,6 +139,13 @@
                     </div>
                 </form>
             </div>
+            {% else %}
+            <div class="post-preview" style="text-align: center">
+                <h2 class="post-title">리뷰작성</h2>
+                <h4 class="post-subtitle">리뷰 작성에는 로그인이 필요해요!</h4>
+                <a class="btn btn-primary" href="{% url 'common:login' %}" style="color: #f8f9fa">로그인 하러 가기</a>
+            </div>
+            {% endif %}
 
         </div>
     </div>
