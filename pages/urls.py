@@ -18,12 +18,15 @@ from django.urls import path
 
 from . import views
 
+app_name = 'pages'
+
 urlpatterns = [
     path('', views.mainpage),
     path('main/', views.mainpage),
     path('service/', views.service),
-    path('review/', views.review),
+    path('review/', views.review, name="review"),
+    # path('review/', views.review_create, name='review_create'),
     path('review/<int:review_id>/', views.detail, name='detail'),
-    path('review/', views.review_create, name='review_create'),
     path('contact/', views.contact),
 ]
+

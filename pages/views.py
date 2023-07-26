@@ -14,26 +14,47 @@ def mainpage(request):
 def service(request):
     return render(request, 'pages/service.html')
 
-def review(request):
-    page = request.GET.get('page', '1')
-    review_list = Review.objects.order_by('-create_date')
-    paginator = Paginator(review_list, 5)
-    page_obj = paginator.get_page(page)
-    context = {'review_list': page_obj}
-    return render(request, 'pages/review.html', context)
+# def review(request):
+#     page = request.GET.get('page', '1')
+#     review_list = Review.objects.order_by('-create_date')
+#     paginator = Paginator(review_list, 5)
+#     page_obj = paginator.get_page(page)
+#     context = {'review_list': page_obj}
+#     return render(request, 'pages/review.html', context)
+#
+# def review_create(request):
+#     if request.method == 'POST':
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             review = form.save(commit=False)
+#             review.author = request.user
+#             review.create_date = timezone.now()
+#             review.save()
+#             return redirect('page:review')
+#     else:
+#         form = ReviewForm()
+#     context = {'form': form}
+#     return render(request, 'pages/review.html', context)
 
-def review_create(request):
+def review(request):
     if request.method == 'POST':
+        # POST 요청일 경우 리뷰 생성 처리
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
+            review.author = request.user
             review.create_date = timezone.now()
-            review.user_name = 'Tester' # TODO: 수정해야할 부분
             review.save()
-            return redirect('page:review')
+            return redirect('pages:review')
     else:
+        # GET 요청일 경우 리뷰 목록 페이지 표시
+        page = request.GET.get('page', '1')
+        review_list = Review.objects.order_by('-create_date')
+        paginator = Paginator(review_list, 5)
+        page_obj = paginator.get_page(page)
         form = ReviewForm()
-    context = {'form': form}
+
+    context = {'review_list': page_obj, 'form': form}
     return render(request, 'pages/review.html', context)
 
 def detail(request, review_id):
