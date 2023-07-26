@@ -1,0 +1,65 @@
+<head>
+    <title>큐오더 - 회원가입</title>
+</head>
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('https://ifh.cc/g/A2mZXH.jpg')">
+    <div class="container position-relative px-1 px-lg-2">
+        <div class="row gx-1 gx-lg-1 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>회원가입</h1>
+                    <span class="subheading">저희 회원이 되어주셔서 감사합니다.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <form class="row g-3">
+                <div class="row-md-4">
+                    <label for="user-id" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="user-id" placeholder="ID" required>
+                </div>
+                <div class="row-md-4">
+                    <label for="user-name" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="user-name" placeholder="ID" required>
+                </div>
+                <div class="row-md-4">
+                    <label for="user-pw" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="user-pw" placeholder="Password" required>
+                </div>
+                <div class="row-md-4">
+                    <label for="user-repw" class="form-label">비밀번호 확인</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="user-repw"
+                               placeholder="Password Confirm" required>
+                    </div>
+                </div>
+                <div class="row-md-6">
+                    <label for="user-email" class="form-label">이메일</label>
+                    <input type="email" class="form-control" id="user-email" required>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                        <label class="form-check-label" for="invalidCheck2">
+                            약관에 동의합니다.
+                        </label>
+                    </div>
+                </div>
+                <div class="row-12" style="text-align: center">
+                    <button class="btn btn-primary" type="submit" style="margin-bottom: 20px">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

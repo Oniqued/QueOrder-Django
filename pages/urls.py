@@ -23,7 +23,7 @@ urlpatterns = [
     path('main/', views.mainpage),
     path('service/', views.service),
     path('review/', views.review),
+    path('review/<int:review_id>/', views.detail, name='detail'),
+    path('review/', views.review_create, name='review_create'),
     path('contact/', views.contact),
-    path('login/', views.login),
-    path('register/', views.register),
 ]

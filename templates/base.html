@@ -1,12 +1,12 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>큐오더 - 회원가입</title>
+        <title>큐오더 - 비대면 결제 서비스</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -36,45 +36,24 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/service">서비스</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/review">이용후기</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">고객센터</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/register">회원가입</a></li>
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'common:logout' %}">{{user.username}} [로그아웃]</a>
+                            {% else %}
+                            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'common:login' %}">[로그인]</a>
+                            {% endif %}
+                        </li>
+                        <li class="nav-item">
+                            {% if not user.is_authenticated %}
+                            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'common:signup' %}">[회원가입]</a>
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Page Header-->
-        <header class="masthead" style="background-image: url('https://ifh.cc/g/A2mZXH.jpg')">
-            <div class="container position-relative px-1 px-lg-2">
-                <div class="row gx-1 gx-lg-1 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>로그인</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    <form class="row g-3">
-                        <div class="row-md-4">
-                            <label for="user-id" class="form-label">아이디</label>
-                            <input type="text" class="form-control" id="user-id" placeholder="ID" required>
-                        </div>
-                        <div class="row-md-4">
-                            <label for="user-pw" class="form-label">비밀번호</label>
-                            <input type="password" class="form-control" id="user-pw" placeholder="Password" required>
-                        </div>
-                        <div class="row-12" style="text-align: center">
-                            <button class="btn btn-primary" type="submit" style="margin-bottom: 20px">로그인</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        {% block content %}
+        {% endblock %}
         <!-- Footer-->
         <footer class="border-top">
             <div class="container px-4 px-lg-5">
