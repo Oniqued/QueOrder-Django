@@ -14,4 +14,13 @@ class Review(models.Model):
     def __str__(self):
         return self.subject
 
+class Contact(models.Model):
+    name = models.CharField(max_length=20)
+    tel_num = models.CharField(max_length=20)
+    mail = models.CharField(max_length=20)
+    content = models.TextField()
+    # status = models.CharField(max_length=20)
+    create_date = models.DateTimeField()
 
+    def __str__(self):
+        return self.content[:20]

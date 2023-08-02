@@ -27,6 +27,7 @@ urlpatterns = [
     path('review/', views.review, name="review"),
     # path('review/', views.review_create, name='review_create'),
     path('review/<int:review_id>/', views.detail, name='detail'),
-    path('contact/', views.contact),
+    path('contact/', views.contact, name="contact"),
+    path('contact/<int:contact_id>/', views.contact_detail, name='contact_detail'),
 ]
 

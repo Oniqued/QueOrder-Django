@@ -1,0 +1,32 @@
+<head>
+    <title>큐오더 - 회원가입</title>
+</head>
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('https://ifh.cc/g/A2mZXH.jpg')">
+    <div class="container position-relative px-1 px-lg-2">
+        <div class="row gx-1 gx-lg-1 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>회원가입</h1>
+                    <span class="subheading">환영합니다!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7" style="text-align: center">
+            <h3>회원가입이 정상적으로 처리되었습니다.</h3>
+            <a class="btn btn-primary" href="{% url 'common:login' %}"
+               style="color: #f8f9fa; margin-top: 25px; margin-bottom: 25px">로그인 하러 가기</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

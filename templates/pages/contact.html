@@ -28,22 +28,37 @@
             <!-- Divider-->
             <hr class="my-4" />
             <!-- 작성 양식 -->
-            <form class="row g-3">
+            <form class="row g-3" id="contact-form" method="post">
+                {% csrf_token %}
+                <!-- 오류표시 Start -->
+                    {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for field in form %}
+                        {% if field.errors %}
+                        <div>
+                            <strong>{{ field.label }}</strong>
+                            {{ field.errors }}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <!-- 오류표시 End -->
                 <div class="row-md-4">
-                    <label for="contact-name" class="form-label">이름</label>
-                    <input type="text" class="form-control" id="contact-name" placeholder="이름" required>
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="이름" required>
                 </div>
                 <div class="row-md-4">
-                    <label for="contact-tel" class="form-label">연락처</label>
-                    <input type="tel" class="form-control" id="contact-tel" placeholder="010-XXXX-XXXX" required>
+                    <label for="tel_num" class="form-label">연락처</label>
+                    <input type="tel" class="form-control" name="tel_num" id="tel_num" placeholder="010-XXXX-XXXX" required>
                 </div>
                 <div class="row-md-6">
-                    <label for="contact-email" class="form-label">이메일</label>
-                    <input type="email" class="form-control" id="contact-email" required>
+                    <label for="mail" class="form-label">이메일</label>
+                    <input type="email" class="form-control" name="mail" id="mail" required>
                 </div>
                 <div class="row-md-6">
-                    <label for="contact-context" class="form-label">문의내용</label>
-                    <textarea class="form-control" id="contact-context" rows="4" cols="50"></textarea>
+                    <label for="content" class="form-label">문의내용</label>
+                    <textarea class="form-control" name="content" id="content" rows="4" cols="50" required></textarea>
                 </div>
                 <div class="row-12">
                     <button class="btn btn-primary" type="submit">질문 작성</button>
@@ -52,4 +67,20 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('mail').value;
+    var context = document.getElementById('content').value;
+
+    var message = name + "님의 문의가 정상적으로 처리 되었습니다.\n"
+                + "빠른 시일 내로 [" + email + "]으로 답변을 보내드리겠습니다.\n"
+                + "문의내용: " + context;
+
+    alert(message);
+    window.location.reload();
+});
+</script>
+
 {% endblock %}

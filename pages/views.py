@@ -6,6 +6,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Review
 from .forms import ReviewForm
+from .models import Contact
+from .forms import ContactForm
 from django.core.paginator import Paginator
 
 def mainpage(request):
@@ -63,7 +65,24 @@ def detail(request, review_id):
     return render(request, 'pages/review_detail.html', context)
 
 def contact(request):
-    return render(request, 'pages/contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        print('contact 호출')
+        if form.is_valid():
+            contact = form.save(commit=False)
+            contact.create_date = timezone.now()
+            contact.save()
+            return redirect('pages:contact')
+    else:
+        form = ContactForm()
+    context = {'form': form}
+    return render(request, 'pages/contact.html', context)
+
+
+def contact_detail(request, contact_id):
+    contact_index = get_object_or_404(Contact, pk=contact_id)
+    context = {'contact': contact}
+    return render(request, 'pages/contact_detail.html', context)
 
 def login(request):
     return render(request, 'pages/login.html')
