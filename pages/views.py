@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
@@ -8,6 +9,7 @@ from .models import Review
 from .forms import ReviewForm
 from .models import Contact
 from .forms import ContactForm
+from django.contrib import messages
 from django.core.paginator import Paginator
 
 def mainpage(request):
@@ -57,6 +59,24 @@ def review(request):
         form = ReviewForm()
 
     context = {'review_list': page_obj, 'form': form}
+    return render(request, 'pages/review.html', context)
+
+@login_required(login_url='common:login')
+def review_modify(request, review_id):
+    review = get_object_or_404(Review, pk=review_id)
+    if request.user != review.author:
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('pages:review', review_id=review.id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.modify_date = timezone.now()  # 수정일시 저장
+            review.save()
+            return redirect('pages:review', review_id=review.id)
+    else:
+        form = ReviewForm(instance=review)
+    context = {'form': form}
     return render(request, 'pages/review.html', context)
 
 def detail(request, review_id):

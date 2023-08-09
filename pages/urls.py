@@ -29,5 +29,7 @@ urlpatterns = [
     path('review/<int:review_id>/', views.detail, name='detail'),
     path('contact/', views.contact, name="contact"),
     path('contact/<int:contact_id>/', views.contact_detail, name='contact_detail'),
+    path('review/modify/<int:review_id>/', views.review_modify, name='review_modify'),
+
 ]
 

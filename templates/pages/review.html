@@ -49,10 +49,27 @@
                                     </div>
                                 </button>
                             </h2>
-                            <div id="flush-collapse{{review.id}}" class="accordion-collapse collapse"
-                                 aria-labelledby="flush-heading{{review.id}}" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapse{{ review.id }}" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-heading{{ review.id }}" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    {{review.content}}
+                                    {{ review.content }}
+                                    <!-- message 표시 -->
+                                    {% if messages %}
+                                        <div class="alert alert-danger my-3" role="alert">
+                                            {% for message in messages %}
+                                                <strong>{{ message.tags }}</strong>
+                                                <ul>
+                                                    <li>{{ message.message }}</li>
+                                                </ul>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                    <div class="my-3">
+                                        {% if request.user == review.author %}
+                                            <a href="{% url 'pages:review_modify' review.id %}"
+                                               class="btn btn-sm btn-outline-secondary">수정</a>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>

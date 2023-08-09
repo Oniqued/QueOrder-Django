@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'mysite',
     'pages',
     'common',
+    'que_order',
 ]
 
 MIDDLEWARE = [
